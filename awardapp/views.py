@@ -1,10 +1,16 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from . models import *
 from django.contrib.auth.forms import UserCreationForm
-# from .forms import ProfileForm,CommentsForm, ImageForm
-# from .email import send_welcome_email
+from .forms import *
+import datetime as dt
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import *
 from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
@@ -47,3 +53,13 @@ def home(request):
     date = dt.date.today()
     projects = Projects.objects.all()
     return render(request, 'index.html', {"date": date,"projects":projects})
+
+def get_project_by_id(request, id):
+
+    try:
+        project = Projects.objects.get(pk = id)
+        
+    except Projects.ObjectDoesNotExist:
+        raise Http404()    
+    
+    return render(request, "project.html", {"project":project})
