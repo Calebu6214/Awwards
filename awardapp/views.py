@@ -64,6 +64,12 @@ def get_project_by_id(request, id):
     
     return render(request, "project.html", {"project":project})
 
+class ProjectsList(APIView):
+    def get(self, request, format=None):
+        all_merch = Projects.objects.all()
+        serializers = ProjectsSerializer(all_merch, many=True)
+        return Response(serializers.data)
+
 @login_required(login_url='login/')
 def new_project(request):
     current_user = request.user
