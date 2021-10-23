@@ -18,6 +18,8 @@
       font-family: "Lato", sans-serif;
     }
 
+   
+
     .sidenav {
       height: 100%;
       width: 0;
@@ -83,9 +85,7 @@
   </div>
   
 
-  <P style="text-decoration: underline;"><a href="{% url 'home' %}">ENGLISH</a></P>
-  <p style="padding-left:30%; margin-top: -2rem;">The awards of design, creativity and innovation on the internet</p>
-  <br>
+  
   <span style="display: inline-flex;float:right; margin-top: -4rem;">
     <p><i class="fa fa-twitter" aria-hidden="true"></i>
     </p>
@@ -94,10 +94,10 @@
     <p style="padding-left:15px;"><i class="fa fa-instagram" aria-hidden="true"></i></p>
   </span>
 
-  <hr>
+  <br> <br>
 
 
-  <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; MENU</span>
+  <span style="font-size:20px;cursor:pointer;" onclick="openNav()">&#9776; MENU</span>
 
   <script>
     function openNav() {
@@ -108,28 +108,29 @@
       document.getElementById("mySidenav").style.width = "0";
     }
   </script>
-  <div class="container-fluid" style="display: inline-flex;">
-  <div style="display: inline-flex;align-items: center;padding-left: 200px" >
+  <div class="container" id="topnav" style="display: inline-flex;">
+  <div style="display: inline-flex;align-items: center;padding-left: 250px" >
     <!-- <p style="padding-top: 10%;"> -->
-      <form class="form-inline" role="search" action="{% url 'search_results' %}">
-        <input type="text" class="form-control" placeholder="" aria-label="Search" name="keyword">
-        <button type="submit" class="btn btn-outline-white btn-md my-2 btn-sm"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
-        
-    </form>     
+        <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
+            <input type="text" class="form-control mr-sm-2" placeholder="" aria-label="Search" name="keyword">
+            <button type="submit" class="btn btn-outline-white btn-md my-2 btn-sm"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+            
+        </form>  
       
     </p>
-    <h3 style="padding-left: 300px;padding-bottom: 10rem;"><a href="{% url 'home' %}">Awards.</a></h3>
   </div>
   
+  <h3 style="padding-left: 250px;padding-bottom: 10rem;"><a href="{% url 'home' %}">Awards.</a></h3>
   <div style="display: inline-flex; float:right; text-decoration: none;margin-top: -1.7rem;padding-left: 6rem;">
     
     <p>
-      <h6 style='padding: 1rem;'><a  href="{% url 'login' %}">Login/Register</a></h6>
+      <h6 style='padding: 1rem;'><a  href="{% url 'login' %}"><button class="btn btn-success">Login/Register</button></a></h6>
     </p>
     <p style="padding-left: 10px;">
       <h6 style="height: 4rem;background-color: aquamarine; padding: 1rem;"><a href="{% url 'new-project' %}">SUBMIT YOUR SITE</a></h6>
     </p>
   </div>
+  
 </div>
   <div class="row">
     {% for project_item in projects %}

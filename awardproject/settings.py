@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django_registration',
     'rest_framework',
     'rest_framework.authtoken',
-    'star_ratings'
+    'star_ratings',
     'crispy_forms',
     'tinymce',
     'bootstrapform',
