@@ -77,6 +77,33 @@ class ProfileList(APIView):
         serializers = ProfileSerializer(all_merch, many=True)
         return Response(serializers.data)
 
+class ProjectsDescription(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get_projects(self, pk):
+        try:
+            return Projects.objects.get(pk=pk)
+        except Projects.DoesNotExist:
+            return Http404
+        
+    def get(self, request, pk, format=None):
+        project = self.get_projects(pk)
+        serializers = ProjectsSerializer(project)
+        return Response(serializers.data)
+    
+    def put(self, request, pk, format=None):
+        project = self.get_projects(pk)
+        serializers = ProjectsSerializer(project, request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk, format=None):
+        project = self.get_projects(pk)
+        project.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 @login_required(login_url='login/')
 def new_project(request):
     current_user = request.user
