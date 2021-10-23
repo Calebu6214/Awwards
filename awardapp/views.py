@@ -70,6 +70,13 @@ class ProjectsList(APIView):
         serializers = ProjectsSerializer(all_merch, many=True)
         return Response(serializers.data)
 
+ 
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_merch = Profile.objects.all()
+        serializers = ProfileSerializer(all_merch, many=True)
+        return Response(serializers.data)
+
 @login_required(login_url='login/')
 def new_project(request):
     current_user = request.user
