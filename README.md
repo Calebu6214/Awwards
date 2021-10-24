@@ -19,7 +19,7 @@
     - Run the code in your code editor  using :
     $ python3 manage.py runserver
 ## Site Link
-. 
+. **https://awardkim.herokuapp.com/**
 
 #### Technologies Used;
     - HTML
