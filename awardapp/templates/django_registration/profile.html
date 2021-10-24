@@ -22,13 +22,13 @@
 
 
 <br><br>
-
+<h3 style="padding-left: 18%;padding-bottom: 5%;"><a class="navbar-brand" href="{% url 'home' %}" type="button" style="font-size:xx-large;">Back to Home<i class="fa fa-home" aria-hidden="true"></i></a></h3>
                 <div class="view overlay zoom image2" style="padding-left: 50%; padding-top: 10%;">
                                 {% if profile%}
                                 <br><br>
-                                
+                                    <p class="text-center" style="color:darkgreen; font-size:x-large; ">Profile image</p>
                                     <img class="card-img-top" src="{{profile.photo.url}}"
-                                        alt="{{ profile.user }}" height="300px" width="320">
+                                        alt="{{ profile.user }}" style="border-radius: 100%;" height="50%" width="50%">
                                                                 
                                 {% endif %}
                             </div>
