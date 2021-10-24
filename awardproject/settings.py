@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zxm)m6o%2yrnm9z7u1o@roqz(jm@=p9!38yf@02%f)6eg69w-l'
+# SECRET_KEY = 'django-insecure-zxm)m6o%2yrnm9z7u1o@roqz(jm@=p9!38yf@02%f)6eg69w-l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -89,17 +89,33 @@ WSGI_APPLICATION = 'awardproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'award',
-        'USER': 'postgres',
-        'PASSWORD':'postgres',
-        'HOST':'127.0.0.1',
-        'PORT':'', 
+MODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG', False)
+# development
+if config('MODE')=="dev":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('NAME'),
+            'USER': config('USER'),
+            'PASSWORD':config('PASSWORD'),
+            'HOST':config('HOST'),
+            'PORT':'', 
+        }
     }
-}
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Password validation
