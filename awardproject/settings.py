@@ -180,3 +180,8 @@ cloudinary.config(
 )
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
